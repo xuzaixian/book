@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>Book</title>
+    <link rel="stylesheet" href="/stylesheet/stylesheet.css">
+    <link rel="stylesheet" href="/stylesheet/font-awesome.min.css">
+</head>
+<body>
+   <header>
+       <span class="title small-font">记账本</span>
+       <span class="header-other small-font">看我宝宝></span>
+   </header>
+   <!--   #infor is VUE挂载点-->
+   <div id="infor" class="small-font">
+       <table id="table">
+           <tr id="table-head">
+               <td id="year" class="table-head-item">
+                    <select class="select" name="year" id="select-year">
+                       <option value="2016">2016年</option>
+                    </select>
+               </td>
+               <td id="money-out" class="table-head-item">花钱啦</td>
+               <td id="money-in" class="table-head-item">来钱啦</td>
+           </tr>
+           <tr id="table-detail">
+               <td id="month" class="table-head-item">
+                    <select class="select" name="month" id="select-month">
+                       <option value="1">1月</option>
+                       <option value="2">2月</option>
+                       <option value="3">3月</option>
+                       <option value="4">4月</option>
+                       <option value="5">5月</option>
+                       <option value="6">6月</option>
+                       <option value="7">7月</option>
+                       <option value="8">8月</option>
+                       <option value="9">9月</option>
+                       <option value="10"10>10月</option>
+                       <option value="11">11月</option>
+                       <option value="12">12月</option>
+                   </select>
+               </td>
+               <td id="money-out-number" class="table-head-item">${ spend }</td>
+               <td id=money-in-number class="table-head-item">${ earn }</td>
+           </tr>
+       </table>
+   </div>
+   
+   <div id="detail">
+       <div id="type-bar">
+           <button class="type-bar-btn btn-left actived-btn">近期明细</button>
+           <button class="type-bar-btn">类别报表</button>
+           <button class="type-bar-btn btn-right">双人报表</button>
+       </div>
+   </div>
+<!--   这个ul是VUE挂载点-->
+    <ul id="main" class="item-list">
+        <li v-for="item in items">
+           <ul>
+                <li class="date">
+                   <span class="date-detail">${ item.day }日-${ days }</span>
+                </li>
+                <li class="main-item" v-for="detail in item.detail">
+                   <div class="icon">
+                       <i class="fa"  v-bind:class="classes[detail.type]" aria-hidden="true"></i>
+                   </div>
+                   <div class="item">
+                       <span class="item-detail small-font">${ detail.detail }</span>
+                       <span class="item-cost small-font">${ detail.count }</span>
+                   </div>
+                </li>
+            </ul>
+        </li>
+    </ul>
+
+
+    <div id="btns">
+        <div id="add-btn">记一笔</div>
+        <div id="delete-btn">删一笔</div>
+    </div>    
+
+    <script>
+        var cssEl = document.createElement('style');
+        document.documentElement.firstElementChild.appendChild(cssEl);
+        function setPxPerRem(){
+            var dpr = 1;
+            //把viewport分成10份的rem，html标签的font-size设置为1rem的大小;
+            var pxPerRem = document.documentElement.clientWidth * dpr / 10;
+            cssEl.innerHTML = 'html{font-size:' + pxPerRem + 'px!important;}';
+        }
+        setPxPerRem();
+    </script>  
+    <script src="/script/vue.js"></script>
+    <script src="/script/script.js"></script>
+<!--    <script src='/script/main.js'></script>-->
+</body>
+</html>

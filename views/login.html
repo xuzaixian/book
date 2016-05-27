@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>登陆记账簿</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <link rel="stylesheet" href="/stylesheet/bootstrap.min.css">
+    <link rel="stylesheet" href="/stylesheet/login.css">
+    
+</head>
+<body>
+    <div id="background"></div>
+<div id="container">
+<form id="login" class="form-horizontal">
+  <div class="form-group">
+    <label for="inputEmail3" class="col-md-4  col-xs-4 control-label">宝宝标识</label>
+    <div class="col-md-8 col-xs-8">
+      <input type="text" class="form-control" id="inputUserid" placeholder="是哪个宝宝？">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="inputPassword3" class="col-md-4  col-xs-4 control-label">宝宝密令</label>
+    <div class="col-md-8 col-xs-8">
+      <input type="password" class="form-control" id="inputPassword" placeholder="宝宝暗号是多少?">
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-md-offset-4 col-xs-offset-4">
+      <div class="checkbox">
+        <label>
+          <input id="ifremember" type="checkbox">记住宝宝
+        </label>
+      </div>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-md-offset-4 col-xs-offset-4">
+      <button type="submit" id="submitButton" class="btn btn-default">宝宝查查</button>
+    </div>
+  </div>
+</form>
+</div>
+    <script src="/script/login.js"></script>
+    <script src="/script/md5.min.js"></script>
+    <script>
+//      借鉴阿里解决方案
+        var cssEl = document.createElement('style');
+        document.documentElement.firstElementChild.appendChild(cssEl);
+        function setPxPerRem(){
+            var dpr = 1;
+            //把viewport分成10份的rem，html标签的font-size设置为1rem的大小;
+            var pxPerRem = document.documentElement.clientWidth * dpr / 10;
+            cssEl.innerHTML = 'html{font-size:' + pxPerRem + 'px!important;}';
+        }
+        setPxPerRem();
+    </script>    
+</body>
+</html>
