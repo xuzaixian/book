@@ -1,30 +1,31 @@
 //var Vue = require('vue');//webpack does work 
 (function(window){
-    Vue.config.debug = true;
-    Vue.config.delimiters = ['${','}'];
-    var dateVue = new Vue({
-        el: "#infor",
-        data:{
-            year:"",
-            month:"",
-            spend:0,
-            earn:0,
-            count:null
-        },
-        created:function(){
-            this.year = this.getPresentYear();
-            this.month = this.getPresentMonth();
-        },
-        methods:{
-             getPresentMonth : function(){
-                return new Date().getMonth();
-             },
-             getPresentYear : function(){
-                return new Date().getFullYear();
-             },
-        }
-    });
-    var vue = new Vue({
+    function initVue(){
+        Vue.config.debug = true;
+        Vue.config.delimiters = ['${','}'];
+        var dateVue = new Vue({
+            el: "#infor",
+            data:{
+                year:"",
+                month:"",
+                spend:0,
+                earn:0,
+                count:null
+            },
+            created:function(){
+                this.year = this.getPresentYear();
+                this.month = this.getPresentMonth();
+            },
+            methods:{
+                 getPresentMonth : function(){
+                    return new Date().getMonth();
+                 },
+                 getPresentYear : function(){
+                    return new Date().getFullYear();
+                 },
+            }
+        });
+        var vue = new Vue({
         el: "#main",
         replace:false,
         data:{
@@ -58,8 +59,8 @@
                         data = xhr.responseText;
                         data = JSON.parse(data);
                         vue.items = data;
+                        vue.calculateTotal();
                     }
-                    vue.calculateTotal();
                 }
                 xhr.send(data);
             },
@@ -90,7 +91,78 @@
             }
         }
     });
-    
-    //draw echarts
+    }
 
+    function initEchart(echart1,echart2){
+        //draw echarts
+        var option1 = {
+                title : {
+                    text: '每月财务情况概览',
+                    x:'center'
+                },
+                series : [
+                    {
+                        name:'面积模式',
+                        type:'pie',
+                        roseType : 'area',
+                        data:[
+                            {value:10, name:'转账'},
+                            {value:5, name:'交通'},
+                            {value:15, name:'娱乐'},
+                            {value:25, name:'饮食'},
+                            {value:20, name:'购物'},
+                        ]
+                    }
+                ]
+        };
+        echart1.setOption(option1);
+    }
+    
+    function btn1_handler(){
+        vueUl.style.display = "block";
+        chart1.style.display = "none";
+        chart2.style.display = "none";
+        btns.style.display = "block";
+    }
+
+    function btn2_handler(){
+        vueUl.style.display = "none";
+        chart1.style.display = "block";
+        chart2.style.display = "none";
+        btns.style.display = "none";
+        echart1.resize();
+    }
+
+    function btn3_handler(){
+        vueUl.style.display = "none";
+        chart1.style.display = "none";
+        chart2.style.display = "block";
+        btns.style.display = "none";
+        echart2.resize();
+    }
+    
+    function initListener(){
+        var btn1 = document.getElementById("btn1"),
+            btn2 = document.getElementById("btn2"),
+            btn3 = document.getElementById("btn3");
+        
+        btn1.addEventListener('click',btn1_handler);
+        btn2.addEventListener('click',btn2_handler);
+        btn3.addEventListener('click',btn3_handler);
+    }
+    
+    function init(){
+        initVue();
+        initEchart(echart1,echart2);
+        initListener();
+    }
+
+    //定义两个图标的容器并且实例化
+    var chart1 = document.getElementById("chart1"),
+        chart2 = document.getElementById("chart2"),
+        echart1 = echarts.init(chart1),
+        echart2 = echarts.init(chart2),
+        vueUl = document.getElementById("main"),
+        btns = document.getElementById("btns");
+    init();
 })(window)

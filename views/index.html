@@ -48,9 +48,9 @@
    
    <div id="detail">
        <div id="type-bar">
-           <button class="type-bar-btn btn-left actived-btn">近期明细</button>
-           <button class="type-bar-btn">类别报表</button>
-           <button class="type-bar-btn btn-right">双人报表</button>
+           <button id="btn1" class="type-bar-btn btn-left actived-btn">近期明细</button>
+           <button id="btn2" class="type-bar-btn">类别报表</button>
+           <button id="btn3" class="type-bar-btn btn-right">双人报表</button>
        </div>
    </div>
 <!--   这个ul是VUE挂载点-->
@@ -72,7 +72,9 @@
             </ul>
         </li>
     </ul>
-
+<!--    两个报表-->
+    <div id="chart1" class="charts" style="display:none"></div>
+    <div id="chart2" class="charts" style="display:none"></div>
 
     <div id="btns">
         <div id="add-btn">记一笔</div>
@@ -91,6 +93,7 @@
         setPxPerRem();
     </script>  
     <script src="/script/vue.js"></script>
+    <script src='/script/echarts.min.js'></script>
     <script src="/script/script.js"></script>
 <!--    <script src='/script/main.js'></script>-->
 </body>

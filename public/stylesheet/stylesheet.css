@@ -156,3 +156,9 @@ table{
     position: relative;
     bottom: 0.2rem;
 }
+
+/*echars*/
+.charts{
+    width: 10rem;
+    height: 10rem;
+}

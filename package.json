@@ -10,10 +10,6 @@
   "license": "ISC",
   "dependencies": {
     "blueimp-md5": "^2.3.0",
-    "bootstrap": "^3.3.6",
-    "gulp": "^3.9.1",
-    "gulp-connect": "^3.2.2",
-    "gulp-livereload": "^3.8.1",
     "koa": "^1.2.0",
     "koa-body": "^1.4.0",
     "koa-logger": "^1.3.0",
@@ -22,10 +18,13 @@
     "koa-router": "^5.4.0",
     "koa-session": "^3.3.1",
     "koa-static": "^2.0.0",
-    "koa-view": "^0.0.3",
-    "webpack": "^1.13.0"
+    "koa-view": "^0.0.3"
   },
   "devDependencies": {
-    "gulp-nodemon": "^2.0.7"
+    "gulp": "^3.9.1",
+    "gulp-connect": "^3.2.2",
+    "gulp-livereload": "^3.8.1",
+    "gulp-nodemon": "^2.0.7",
+    "webpack": "^1.13.0"
   }
 }
