@@ -147,7 +147,7 @@
 	                    x:'center'
 	                },
 	                textStyle:{
-	                    fontSize:40
+	                    fontSize:25
 	                },
 	                series : [
 	                    {
@@ -197,7 +197,6 @@
 	    function addPanel_add(){
 	        
 	        vue.getData();
-	        
 	    }
 	    
 	    function addPanel_cancle(){
@@ -205,9 +204,6 @@
 	    }
 	    
 	    function initListener(){
-	        var btn1 = document.getElementById("btn1"),
-	            btn2 = document.getElementById("btn2"),
-	            btn3 = document.getElementById("btn3");
 	        btn1.addEventListener('click',btn1_handler);
 	        btn2.addEventListener('click',btn2_handler);
 	        btn3.addEventListener('click',btn3_handler);
@@ -233,7 +229,10 @@
 	        deletedbtn = document.getElementById("delete-btn"),
 	        addPanel_add = document.getElementById("add-submit"),
 	        addPanel_cancle = document.getElementById("add-cancle"),
-	        addPanel = document.getElementById("add-panel");
+	        addPanel = document.getElementById("add-panel"),
+	        btn1 = document.getElementById("btn1"),
+	        btn2 = document.getElementById("btn2"),
+	        btn3 = document.getElementById("btn3");
 	    
 	    init();
 	})(window)

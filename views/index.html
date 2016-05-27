@@ -5,6 +5,7 @@
     <title>Book</title>
     <link rel="stylesheet" href="/stylesheet/stylesheet.css">
     <link rel="stylesheet" href="/stylesheet/font-awesome.min.css">
+    <meta name="viewport" content="initial-scale=1">
 </head>
 <body>
    <header>
@@ -83,8 +84,8 @@
    
     <div id="add-panel" class="flex small-font">
        <div id="add-type" class="flex small-font">
-       <label for="">类别</label>
-           <select name="type" id="">
+           <label for="">类别</label>
+           <select name="type" id="" class="small-font">
                <option value="transfer">转账</option>
                <option value="entertainment">娱乐</option>
                <option value="shopping">购物</option>
@@ -101,12 +102,14 @@
            <input type="text">
        </div>
        <div id="add-negative" class="flex small-font">
-           <input type="radio" name="neg" value="male" /> 支出<br />
-           <input type="radio" name="pos" value="female" /> 收入<br />
+            <label for="">支出</label>
+           <input class="radio-input" type="radio" name="neg" value="neg" />
+            <label for="">收入</label>
+           <input class="radio-input" type="radio" name="pos" value="pos" />
        </div>
        <div id="add-btns" class="flex small-font">
-           <button id="add-submit" class="add-btns">确定</button>
-           <button id="add-cancle" class="add-btns">取消</button>
+           <button id="add-submit" class="add-btns small-font">确定</button>
+           <button id="add-cancle" class="add-btns small-font">取消</button>
        </div>
     </div>
    

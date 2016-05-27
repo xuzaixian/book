@@ -28,11 +28,12 @@ header{
 /*todo:去掉input的小三角*/
 #infor {
     background-color: dimgrey;
-    height: 1.7rem;
+    height: 2rem;
     margin-top: 1.3rem
 }
 table{
     margin: auto;
+    text-align: center;
 }
 .select{
     background-color: dimgrey;
@@ -40,11 +41,7 @@ table{
     font-size: 0.5rem;
     color:lightgray;
     text-align: center;
-/*    去掉右侧的小三角*/
-    appearence: none;
-    -webkit-appearence:none;
-    -webkit-tap-highlight-color: #fff;
-    outline: 0;
+
 }
 #select-month{
     color:white;
@@ -54,6 +51,7 @@ table{
 }
 .table-head-item {
     width: 3rem;
+    height
     text-align: center;
 }
 #table-detail{
@@ -195,13 +193,17 @@ table{
     margin: 0.5rem;
 }
 #add-panel label{
+    width: 2rem;
     margin-right: 1rem;
 }
 #add-panel input{
     width: 5rem;
 }
-#add-negative{
-    justify-content: flex-start;
+#add-panel select{
+    width: 5rem;
+}
+.radio-input{
+    width: 1rem !important;
 }
 .add-btns{
     width: 2rem;
