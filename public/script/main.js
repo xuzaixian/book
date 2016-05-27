@@ -194,12 +194,12 @@
 	        addPanel.className = "add-panel-transition";
 	    }
 	    
-	    function addPanel_add(){
+	    function addPanel_add_handler(){
 	        
 	        vue.getData();
 	    }
 	    
-	    function addPanel_cancle(){
+	    function addPanel_cancle_handler(){
 	        addPanel.className = "";
 	    }
 	    
@@ -208,8 +208,8 @@
 	        btn2.addEventListener('click',btn2_handler);
 	        btn3.addEventListener('click',btn3_handler);
 	        addbtn.addEventListener('click',addPanel_handler);
-	        addPanel_add.addEventListener('click',addPanel_add);
-	        addPanel_cancle.addEventListener('click',addPanel_cancle);
+	        addPanel_add.addEventListener('click',addPanel_add_handler);
+	        addPanel_cancle.addEventListener('click',addPanel_cancle_handler);
 	    }
 	    
 	    function init(){

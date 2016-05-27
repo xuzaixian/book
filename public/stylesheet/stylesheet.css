@@ -202,8 +202,13 @@ table{
 #add-panel select{
     width: 5rem;
 }
+#add-negative label{
+    margin-right: 0 !important;
+    width: 1rem;
+}
 .radio-input{
     width: 1rem !important;
+    margin-top: 0.2rem;
 }
 .add-btns{
     width: 2rem;
