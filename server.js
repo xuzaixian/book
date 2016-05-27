@@ -23,7 +23,10 @@ app.use(logger());
 //config static files dir
 app.use(static(__dirname+'/public'));
 //config mongodb
-app.use(mongo());
+app.use(mongo({
+    host: '115.28.81.27',
+    port: 27017
+}));
 //config view folder
 app.use(view(__dirname+'/views'));
 //cookies key
