@@ -5,7 +5,6 @@
     border: 0;
     font-family: "Microsoft YaHei";
 }
-
 .small-font{
     font-size: 0.5rem;
 }
@@ -21,7 +20,6 @@ header{
 .header-other {
     float: right;
 }
-
 .title {
     float: left;
     margin-left: 4.3rem;
@@ -48,7 +46,6 @@ table{
     -webkit-tap-highlight-color: #fff;
     outline: 0;
 }
-
 #select-month{
     color:white;
 }
@@ -64,6 +61,8 @@ table{
     font-size: 0.7rem;
 }
 /*第一个vue end*/
+
+/*中间三个按钮*/
 #type-bar {
     display: flex;
     justify-content:center;
@@ -90,12 +89,18 @@ table{
     background: black;
     color: white;
 }
+/*end*/
 
 .date {
     color:gray;
     font-size: 0.3rem;
     border-bottom: 1px solid gray;
     padding: 0 0.3rem;
+    height: 1rem;
+}
+.date-detail{
+    position: relative;
+    bottom: 0.5rem;
 }
 
 #btns {
@@ -114,10 +119,9 @@ table{
     width: 4.8rem;
 }
 
-
-
 .main-item {
-    padding: 0.5rem 0.5rem 0 0.5rem;
+    padding: 0.1rem 0.5rem 0.1rem 0.5rem;
+    height: 1rem;
 }
 
 .item {
@@ -161,4 +165,46 @@ table{
 .charts{
     width: 10rem;
     height: 10rem;
+}
+/*end*/
+
+
+/*定义flex 竖着对齐 往左靠拢*/
+.flex{
+    display: flex;
+    justify-content: center;
+}
+
+/*添加窗口*/
+#add-panel{
+    width:10rem;
+    height:7rem;
+    position: fixed;
+    flex-direction: column;
+    bottom: -7rem;
+    background-color: dimgray;
+    transition: bottom 1s;
+    -webkit-transition: bottom 1s;
+    transition-timing-function: ease-in-out;
+    -webkit-transition-timing-function: ease-in-out;
+}
+.add-panel-transition{
+    bottom: 0rem !important;
+}
+#add-panel div{
+    margin: 0.5rem;
+}
+#add-panel label{
+    margin-right: 1rem;
+}
+#add-panel input{
+    width: 5rem;
+}
+#add-negative{
+    justify-content: flex-start;
+}
+.add-btns{
+    width: 2rem;
+    height: 1rem;
+    margin: 0 1rem;
 }

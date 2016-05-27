@@ -100,6 +100,9 @@
                     text: '每月财务情况概览',
                     x:'center'
                 },
+                textStyle:{
+                    fontSize:40
+                },
                 series : [
                     {
                         name:'面积模式',
@@ -141,14 +144,30 @@
         echart2.resize();
     }
     
+    function addPanel_handler(){
+        addPanel.className = "add-panel-transition";
+    }
+    
+    function addPanel_add(){
+        
+        vue.getData();
+        
+    }
+    
+    function addPanel_cancle(){
+        addPanel.className = "";
+    }
+    
     function initListener(){
         var btn1 = document.getElementById("btn1"),
             btn2 = document.getElementById("btn2"),
             btn3 = document.getElementById("btn3");
-        
         btn1.addEventListener('click',btn1_handler);
         btn2.addEventListener('click',btn2_handler);
         btn3.addEventListener('click',btn3_handler);
+        addbtn.addEventListener('click',addPanel_handler);
+        addPanel_add.addEventListener('click',addPanel_add);
+        addPanel_cancle.addEventListener('click',addPanel_cancle);
     }
     
     function init(){
@@ -163,6 +182,12 @@
         echart1 = echarts.init(chart1),
         echart2 = echarts.init(chart2),
         vueUl = document.getElementById("main"),
-        btns = document.getElementById("btns");
+        btns = document.getElementById("btns"),
+        addbtn = document.getElementById("add-btn"),
+        deletedbtn = document.getElementById("delete-btn"),
+        addPanel_add = document.getElementById("add-submit"),
+        addPanel_cancle = document.getElementById("add-cancle"),
+        addPanel = document.getElementById("add-panel");
+    
     init();
 })(window)

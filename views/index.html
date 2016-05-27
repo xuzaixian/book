@@ -9,7 +9,7 @@
 <body>
    <header>
        <span class="title small-font">记账本</span>
-       <span class="header-other small-font">看我宝宝></span>
+<!--       <span class="header-other small-font">看我宝宝></span>-->
    </header>
    <!--   #infor is VUE挂载点-->
    <div id="infor" class="small-font">
@@ -79,8 +79,37 @@
     <div id="btns">
         <div id="add-btn">记一笔</div>
         <div id="delete-btn">删一笔</div>
-    </div>    
-
+    </div>
+   
+    <div id="add-panel" class="flex small-font">
+       <div id="add-type" class="flex small-font">
+       <label for="">类别</label>
+           <select name="type" id="">
+               <option value="transfer">转账</option>
+               <option value="entertainment">娱乐</option>
+               <option value="shopping">购物</option>
+               <option value="traffic">交通</option>
+               <option value="food">饮食</option>
+           </select>
+       </div>
+       <div id="add-detail" class="flex small-font">
+           <label for="">详情</label>
+           <input type="text">
+       </div>
+       <div id="add-count" class="flex small-font">
+           <label for="">金额</label>
+           <input type="text">
+       </div>
+       <div id="add-negative" class="flex small-font">
+           <input type="radio" name="neg" value="male" /> 支出<br />
+           <input type="radio" name="pos" value="female" /> 收入<br />
+       </div>
+       <div id="add-btns" class="flex small-font">
+           <button id="add-submit" class="add-btns">确定</button>
+           <button id="add-cancle" class="add-btns">取消</button>
+       </div>
+    </div>
+   
     <script>
         var cssEl = document.createElement('style');
         document.documentElement.firstElementChild.appendChild(cssEl);
