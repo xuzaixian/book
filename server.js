@@ -124,6 +124,7 @@ getData.post('/getdata',koabody,
 );
 
 addItem.post('/addItem',koabody,function *(next){
+    this.status = 200;
     var item = JSON.parse(this.request.body);
     //connect DB
         var db = yield MongoClient.connect("mongodb://115.28.81.27:27017/book");

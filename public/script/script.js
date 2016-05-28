@@ -1,9 +1,22 @@
 //var Vue = require('vue');//webpack does work 
 (function(window){
+    function ajax(type,url,data,callback){
+        if(!xhr){
+            var xhr = new XMLHttpRequest();
+        }
+        xhr.open(type,url,true);
+        xhr.setRequestHeader("Accept","application/json");
+        xhr.onreadystatechange = function(){
+            if(xhr.readyState === 4 && xhr.status === 200){
+                callback(JSON.parse(xhr.responseText));
+            }
+        }
+        xhr.send(JSON.stringify(data));
+    }
     function initVue(){
         Vue.config.debug = true;
         Vue.config.delimiters = ['${','}'];
-        var dateVue = new Vue({
+        dateVue = new Vue({
             el: "#infor",
             data:{
                 year:"",
@@ -28,7 +41,7 @@
                  }
             }
         });
-        var vue = new Vue({
+        vue = new Vue({
         el: "#main",
         replace:false,
         data:{
@@ -170,8 +183,8 @@
         var date = document.getElementById("panel-date").valueAsDate,
             data = {
                 "year":date.getFullYear(),
-                "month":date.getMonth(),
-                "day":date.getDay(),
+                "month":date.getMonth()+1,
+                "day":date.getDate(),
                 "type":document.getElementById("panel-type").value,
                 "detail":document.getElementById("panel-detail").value,
                 "count":document.getElementById("panel-count").value
@@ -184,19 +197,7 @@
             console.log(msg);
         });
         vue.getData();
-    }
-    function ajax(type,url,data,callback){
-        if(!xhr){
-            var xhr = new XMLHttpRequest();
-        }
-        xhr.open(type,url,true);
-        xhr.setRequestHeader("Accept","application/json");
-        xhr.onreadystatechange = function(){
-            if(xhr.readyState === 4 && xhr.status === 200){
-                callback(JSON.parse(xhr.responseText));
-            }
-        }
-        xhr.send(JSON.stringify(data));
+        addPanel_cancle_handler();
     }
     function addPanel_cancle_handler(){
         addPanel.className = "";
@@ -225,7 +226,9 @@
         addPanel_cancle = document.getElementById("add-cancle"),
         addPanel = document.getElementById("add-panel"),
         btn1 = document.getElementById("btn1"),
-        btn2 = document.getElementById("btn2");
+        btn2 = document.getElementById("btn2"),
+        vue,
+        dateVue;
     
     init();
 })(window)
