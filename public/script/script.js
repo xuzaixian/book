@@ -23,6 +23,10 @@
                  getPresentYear : function(){
                     return new Date().getFullYear();
                  },
+                 onChangHandler : function(){
+                     vue.getData();
+                     console.log("1");
+                 }
             }
         });
         var vue = new Vue({
@@ -42,11 +46,11 @@
             this.getData();
         },
         methods:{
-            getData:function(month){
+            getData:function(){
                 var xhr = new XMLHttpRequest(),
                     date = {
-                        "year" : dateVue.year,
-                        "month" : dateVue.month
+                        "year" : parseInt(dateVue.year),
+                        "month" : parseInt(dateVue.month)
                     },
                     method = "post",
                     url = "/getdata";
@@ -98,16 +102,41 @@
         var option1 = {
                 title : {
                     text: '每月财务情况概览',
+                    subtext: 'x',
                     x:'center'
                 },
                 textStyle:{
-                    fontSize:25
+                    fontSize:20
+                },
+                legend: {
+                    orient: 'vertical',
+                    x: 'left',
+                    data:['转账','交通','娱乐','饮食','购物']
                 },
                 series : [
                     {
-                        name:'面积模式',
+                        name:'访问来源',
                         type:'pie',
-                        roseType : 'area',
+                        radius: ['50%', '70%'],
+                        avoidLabelOverlap: false,
+                        label: {
+                            normal: {
+                                show: false,
+                                position: 'center'
+                            },
+                            emphasis: {
+                                show: true,
+                                textStyle: {
+                                    fontSize: '30',
+                                    fontWeight: 'bold'
+                                }
+                            }
+                        },
+                        labelLine: {
+                            normal: {
+                                show: false
+                            }
+                        },
                         data:[
                             {value:10, name:'转账'},
                             {value:5, name:'交通'},
@@ -124,26 +153,14 @@
     function btn1_handler(){
         vueUl.style.display = "block";
         chart1.style.display = "none";
-        chart2.style.display = "none";
         btns.style.display = "block";
     }
-
     function btn2_handler(){
         vueUl.style.display = "none";
         chart1.style.display = "block";
-        chart2.style.display = "none";
         btns.style.display = "none";
         echart1.resize();
     }
-
-    function btn3_handler(){
-        vueUl.style.display = "none";
-        chart1.style.display = "none";
-        chart2.style.display = "block";
-        btns.style.display = "none";
-        echart2.resize();
-    }
-    
     function addPanel_handler(){
         addPanel.className = "add-panel-transition";
     }
@@ -160,7 +177,6 @@
     function initListener(){
         btn1.addEventListener('click',btn1_handler);
         btn2.addEventListener('click',btn2_handler);
-        btn3.addEventListener('click',btn3_handler);
         addbtn.addEventListener('click',addPanel_handler);
         addPanel_add.addEventListener('click',addPanel_add_handler);
         addPanel_cancle.addEventListener('click',addPanel_cancle_handler);
@@ -168,25 +184,22 @@
     
     function init(){
         initVue();
-        initEchart(echart1,echart2);
+        initEchart(echart1);
         initListener();
     }
 
     //定义两个图标的容器并且实例化
     var chart1 = document.getElementById("chart1"),
-        chart2 = document.getElementById("chart2"),
         echart1 = echarts.init(chart1),
-        echart2 = echarts.init(chart2),
         vueUl = document.getElementById("main"),
-        btns = document.getElementById("btns"),
+        btns = document.getElementById("btns"),//最下面的记一笔
         addbtn = document.getElementById("add-btn"),
         deletedbtn = document.getElementById("delete-btn"),
         addPanel_add = document.getElementById("add-submit"),
         addPanel_cancle = document.getElementById("add-cancle"),
         addPanel = document.getElementById("add-panel"),
         btn1 = document.getElementById("btn1"),
-        btn2 = document.getElementById("btn2"),
-        btn3 = document.getElementById("btn3");
+        btn2 = document.getElementById("btn2");
     
     init();
 })(window)

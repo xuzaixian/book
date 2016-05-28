@@ -5,19 +5,19 @@
     <title>Book</title>
     <link rel="stylesheet" href="/stylesheet/stylesheet.css">
     <link rel="stylesheet" href="/stylesheet/font-awesome.min.css">
-    <meta name="viewport" content="initial-scale=1">
+    <meta name="viewport" content="initial-scale=1,maximum-scale=1.0">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
 </head>
 <body>
    <header>
        <span class="title small-font">记账本</span>
-<!--       <span class="header-other small-font">看我宝宝></span>-->
    </header>
    <!--   #infor is VUE挂载点-->
    <div id="infor" class="small-font">
        <table id="table">
            <tr id="table-head">
                <td id="year" class="table-head-item">
-                    <select class="select" name="year" id="select-year">
+                    <select @onchange="onChangHandler" v-model="year"  class="select" name="year" id="select-year">
                        <option value="2016">2016年</option>
                     </select>
                </td>
@@ -26,19 +26,19 @@
            </tr>
            <tr id="table-detail">
                <td id="month" class="table-head-item">
-                    <select class="select" name="month" id="select-month">
-                       <option value="1">1月</option>
-                       <option value="2">2月</option>
-                       <option value="3">3月</option>
-                       <option value="4">4月</option>
-                       <option value="5">5月</option>
-                       <option value="6">6月</option>
-                       <option value="7">7月</option>
-                       <option value="8">8月</option>
-                       <option value="9">9月</option>
-                       <option value="10"10>10月</option>
-                       <option value="11">11月</option>
-                       <option value="12">12月</option>
+                    <select @change="onChangHandler" v-model="month" class="select" name="month" id="select-month">
+                       <option value=1>1月</option>
+                       <option value=2>2月</option>
+                       <option value=3>3月</option>
+                       <option value=4>4月</option>
+                       <option value=5>5月</option>
+                       <option value=6>6月</option>
+                       <option value=7>7月</option>
+                       <option value=8>8月</option>
+                       <option value=9>9月</option>
+                       <option value=10>10月</option>
+                       <option value=11>11月</option>
+                       <option value=12>12月</option>
                    </select>
                </td>
                <td id="money-out-number" class="table-head-item">${ spend }</td>
@@ -50,8 +50,7 @@
    <div id="detail">
        <div id="type-bar">
            <button id="btn1" class="type-bar-btn btn-left actived-btn">近期明细</button>
-           <button id="btn2" class="type-bar-btn">类别报表</button>
-           <button id="btn3" class="type-bar-btn btn-right">双人报表</button>
+           <button id="btn2" class="type-bar-btn btn-right">类别报表</button>
        </div>
    </div>
 <!--   这个ul是VUE挂载点-->
@@ -62,27 +61,25 @@
                    <span class="date-detail">${ item.day }日-${ days }</span>
                 </li>
                 <li class="main-item" v-for="detail in item.detail">
-                   <div class="icon">
                        <i class="fa"  v-bind:class="classes[detail.type]" aria-hidden="true"></i>
-                   </div>
-                   <div class="item">
-                       <span class="item-detail small-font">${ detail.detail }</span>
+                       <div class="item-detail small-font">${ detail.detail }</div>
                        <span class="item-cost small-font">${ detail.count }</span>
-                   </div>
                 </li>
             </ul>
         </li>
     </ul>
 <!--    两个报表-->
     <div id="chart1" class="charts" style="display:none"></div>
-    <div id="chart2" class="charts" style="display:none"></div>
 
     <div id="btns">
         <div id="add-btn">记一笔</div>
-        <div id="delete-btn">删一笔</div>
     </div>
    
     <div id="add-panel" class="flex small-font">
+      <div id="add-date" class="flex small-font">
+          <label for="">日期</label>
+          <input type="date">
+      </div>
        <div id="add-type" class="flex small-font">
            <label for="">类别</label>
            <select name="type" id="" class="small-font">
