@@ -71,7 +71,6 @@
 	                 },
 	                 onChangHandler : function(){
 	                     vue.getData();
-	                     console.log("1");
 	                 }
 	            }
 	        });
@@ -99,20 +98,25 @@
 	                        "month" : parseInt(dateVue.month)
 	                    },
 	                    method = "post",
-	                    url = "/getdata";
-	                    data = JSON.stringify(date);
-	                xhr.open(method,url,true);
-	                xhr.setRequestHeader("Accept","application/json");
-	                xhr.onreadystatechange = function(){
-	                    var data = null;
-	                    if(xhr.readyState === 4 && xhr.status === 200){
-	                        data = xhr.responseText;
-	                        data = JSON.parse(data);
-	                        vue.items = data;
-	                        vue.calculateTotal();
-	                    }
-	                }
-	                xhr.send(data);
+	                    url = "/getdata",
+	                    data = date;
+	                ajax(method,url,data,function(msg){
+	                    vue.items = msg;
+	                    vue.calculateTotal();
+	                });
+	                
+	//                xhr.open(method,url,true);
+	//                xhr.setRequestHeader("Accept","application/json");
+	//                xhr.onreadystatechange = function(){
+	//                    var data = null;
+	//                    if(xhr.readyState === 4 && xhr.status === 200){
+	//                        data = xhr.responseText;
+	//                        data = JSON.parse(data);
+	//                        vue.items = data;
+	//                        vue.calculateTotal();
+	//                    }
+	//                }
+	//                xhr.send(data);
 	            },
 	            calculateTotal:function(){
 	                var data = this.items,
@@ -142,7 +146,6 @@
 	        }
 	    });
 	    }
-
 	    function initEchart(echart1,echart2){
 	        //draw echarts
 	        var option1 = {
@@ -195,7 +198,6 @@
 	        };
 	        echart1.setOption(option1);
 	    }
-	    
 	    function btn1_handler(){
 	        vueUl.style.display = "block";
 	        chart1.style.display = "none";
@@ -210,16 +212,41 @@
 	    function addPanel_handler(){
 	        addPanel.className = "add-panel-transition";
 	    }
-	    
 	    function addPanel_add_handler(){
-	        
+	        var date = document.getElementById("panel-date").valueAsDate,
+	            data = {
+	                "year":date.getFullYear(),
+	                "month":date.getMonth(),
+	                "day":date.getDay(),
+	                "type":document.getElementById("panel-type").value,
+	                "detail":document.getElementById("panel-detail").value,
+	                "count":document.getElementById("panel-count").value
+	            },
+	            radios = document.querySelector(".radio-input");
+	            if(radios.checked){
+	                data.count = data.count * -1;
+	            }
+	        ajax("post","/add-item",data,function(msg){
+	            console.log(msg);
+	        });
 	        vue.getData();
 	    }
-	    
+	    function ajax(type,url,data,callback){
+	        if(!xhr){
+	            var xhr = new XMLHttpRequest();
+	        }
+	        xhr.open(type,url,true);
+	        xhr.setRequestHeader("Accept","application/json");
+	        xhr.onreadystatechange = function(){
+	            if(xhr.readyState === 4 && xhr.status === 200){
+	                callback(JSON.parse(xhr.responseText));
+	            }
+	        }
+	        xhr.send(JSON.stringify(data));
+	    }
 	    function addPanel_cancle_handler(){
 	        addPanel.className = "";
 	    }
-	    
 	    function initListener(){
 	        btn1.addEventListener('click',btn1_handler);
 	        btn2.addEventListener('click',btn2_handler);
@@ -227,7 +254,6 @@
 	        addPanel_add.addEventListener('click',addPanel_add_handler);
 	        addPanel_cancle.addEventListener('click',addPanel_cancle_handler);
 	    }
-	    
 	    function init(){
 	        initVue();
 	        initEchart(echart1);

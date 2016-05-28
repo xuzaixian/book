@@ -5,8 +5,10 @@
     <title>Book</title>
     <link rel="stylesheet" href="/stylesheet/stylesheet.css">
     <link rel="stylesheet" href="/stylesheet/font-awesome.min.css">
+    
     <meta name="viewport" content="initial-scale=1,maximum-scale=1.0">
     <meta name="apple-mobile-web-app-capable" content="yes" />
+    
 </head>
 <body>
    <header>
@@ -78,11 +80,11 @@
     <div id="add-panel" class="flex small-font">
       <div id="add-date" class="flex small-font">
           <label for="">日期</label>
-          <input type="date">
+          <input id="panel-date" type="date">
       </div>
        <div id="add-type" class="flex small-font">
            <label for="">类别</label>
-           <select name="type" id="" class="small-font">
+           <select name="type" id="panel-type" class="small-font">
                <option value="transfer">转账</option>
                <option value="entertainment">娱乐</option>
                <option value="shopping">购物</option>
@@ -92,11 +94,11 @@
        </div>
        <div id="add-detail" class="flex small-font">
            <label for="">详情</label>
-           <input type="text">
+           <input id="panel-detail" type="text">
        </div>
        <div id="add-count" class="flex small-font">
            <label for="">金额</label>
-           <input type="text">
+           <input id="panel-count" type="text">
        </div>
        <div id="add-negative" class="flex small-font">
             <label for="">支出</label>

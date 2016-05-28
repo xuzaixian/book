@@ -3,18 +3,18 @@ var router = require('koa-router');
 var static = require('koa-static');
 var logger = require('koa-logger');
 var view = require('koa-view');
-var mongo = require('koa-mongo');
 var koabody = require('koa-body')();
 var session = require('koa-session');
 var md5 = require('blueimp-md5');
+var MongoClient = require('mongodb').MongoClient;
 
 var app = koa();
 var index = router(),
     login = router(),
-    book = router();
-    login_handler = router();
-    getData = router();
-
+    book = router(),
+    login_handler = router(),
+    getData = router(),
+    addItem = router();
 
 //app config
 
@@ -22,11 +22,6 @@ var index = router(),
 app.use(logger());
 //config static files dir
 app.use(static(__dirname+'/public'));
-//config mongodb
-app.use(mongo({
-    host: '115.28.81.27',
-    port: 27017
-}));
 //config view folder
 app.use(view(__dirname+'/views'));
 //cookies key
@@ -34,8 +29,6 @@ app.keys = ['baobao','keai'];
 //session 
 app.use(session(app));
 //app router
-
-
 
 book.get('/book',function*(){
     if(!this.session.login){
@@ -81,8 +74,10 @@ login_handler.post('/login_handler',koabody,
 getData.post('/getdata',koabody,
     function *(next){
         this.status = 200;
-        var data = yield this.mongo.db('book').collection('detail').findOne({id:this.session.id});
-        this.ary = data.details;
+        var db = yield MongoClient.connect("mongodb://115.28.81.27:27017/book");
+        var collection = db.collection(this.session.id);
+        var docs = yield collection.find().toArray();
+        this.ary = docs;
         yield next;
         this.body = this.ary;
     },
@@ -128,6 +123,14 @@ getData.post('/getdata',koabody,
     }
 );
 
+addItem.post('/addItem',koabody,function *(next){
+    var item = JSON.parse(this.request.body);
+    //connect DB
+        var db = yield MongoClient.connect("mongodb://115.28.81.27:27017/book");
+        var collection = db.collection(this.session.id);
+        collection.insertOne(item);
+  });
+  
 //regist router
 app.use(index.routes())
    .use(index.allowedMethods());
@@ -139,6 +142,8 @@ app.use(book.routes())
    .use(book.allowedMethods());
 app.use(getData.routes())
    .use(getData.allowedMethods());
+app.use(addItem.routes())
+   .use(addItem.allowedMethods());
  //create server
 app.listen(3333);
 

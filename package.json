@@ -13,12 +13,12 @@
     "koa": "^1.2.0",
     "koa-body": "^1.4.0",
     "koa-logger": "^1.3.0",
-    "koa-mongo": "^0.5.0",
     "koa-mount": "^1.3.0",
     "koa-router": "^5.4.0",
     "koa-session": "^3.3.1",
     "koa-static": "^2.0.0",
-    "koa-view": "^0.0.3"
+    "koa-view": "^0.0.3",
+    "mongodb": "^2.1.20",
   },
   "devDependencies": {
     "gulp": "^3.9.1",
